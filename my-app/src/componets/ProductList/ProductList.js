@@ -8,9 +8,14 @@ import PreLoader from "../PreLoader/PreLoader";
 class ProductList extends Component{
 
     componentDidMount() {
+        console.log('componentDidMount')
         this.props.onAddProduct(); //Получим данные о товаре
     }
 
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    //     console.log('componentDidUpdate')
+    //     this.props.onAddProduct();
+    // }
 
     //Функция которая выводит товары
     renderListData() {
@@ -22,6 +27,7 @@ class ProductList extends Component{
         if (this.props.propsProduct.length) {
             //Фильтр товаров
             let products = this.props.propsProduct;
+            console.log(products)
             let filterProducts;
             if (products.length) {
                 for (let i = 0; i < products.length; i++) {
@@ -58,9 +64,11 @@ class ProductList extends Component{
 
     render() {
         return (
-            <div className="productList__wrapper">
-                {this.renderListData()}
-            </div>
+            <>
+                <div className="productList__wrapper">
+                    {this.renderListData()}
+                </div>
+            </>
         )
     }
 }

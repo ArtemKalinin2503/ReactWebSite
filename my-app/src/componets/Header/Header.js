@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import {onFilterProducts} from "../../actions";
+import {Link} from "react-router-dom";
 
 class Header extends Component {
 
@@ -17,9 +18,7 @@ class Header extends Component {
                     <div className="nav-wrapper">
                         <a href="/" className="brand-logo">Logo</a>
                         <ul id="nav-mobile" className="right hide-on-med-and-down">
-                            <li><a href="sass.html">Sass</a></li>
-                            <li><a href="badges.html">Components</a></li>
-                            <li><a href="collapsible.html">JavaScript</a></li>
+                            <Link to="/">Star DB</Link>
                         </ul>
                     </div>
                 </nav>
@@ -53,7 +52,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        onFilter: (payload) => dispatch(onFilterProducts(payload)) //
+        onFilter: (payload) => dispatch(onFilterProducts(payload)) //Action который запишем value из Фильтра в state filterProducts
     }
 }
 

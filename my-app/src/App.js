@@ -1,13 +1,21 @@
 import React from 'react';
+import {BrowserRouter as Router, Route, Switch , Redirect, Link} from 'react-router-dom';
 import './App.scss';
-import Header from "./componets/Header/Header";
 import ProductList from "./componets/ProductList/ProductList";
+import ProductCard from "./componets/ProductCard/ProductCard";
+import Header from "./componets/Header/Header";
 
 function App() {
   return (
     <div className="App">
-        <Header/>
-        <ProductList/>
+        <Router>
+            <Header/>
+            <Switch>
+                <Route path="/" component={ProductList} exact/>
+                <Route path="/productCar" component={ProductCard} exact/>
+                <Redirect to="/"/>
+            </Switch>
+        </Router>
     </div>
   );
 }
