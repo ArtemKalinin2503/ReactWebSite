@@ -1,10 +1,10 @@
 import axios from 'axios';
-import {ADD_PRODUCT_STARTED, ADD_PRODUCT_SUCCESS, ADD_PRODUCT_FAILURE} from './actionsType'
+import {ADD_PRODUCT_STARTED, ADD_PRODUCT_SUCCESS, ADD_PRODUCT_FAILURE, FILTER_PRODUCT} from './actionsType'
 
 const addProductStarted = () => ({type: ADD_PRODUCT_STARTED})
 const addProductSuccess = (payload) => ({type: ADD_PRODUCT_SUCCESS, payload: payload})
 const addProductFailure = (error) => ({type: ADD_PRODUCT_FAILURE, payload: {error}})
-
+const onFilterProducts = (payload) => ({type: FILTER_PRODUCT, payload: payload})
 
 //Thunk
 const addProduct = () => {
@@ -29,5 +29,6 @@ export {
     addProductStarted,
     addProductSuccess,
     addProductFailure,
-    addProduct
+    addProduct,
+    onFilterProducts
 }

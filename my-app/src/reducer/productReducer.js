@@ -2,12 +2,14 @@ import {
     ADD_PRODUCT_STARTED,
     ADD_PRODUCT_SUCCESS,
     ADD_PRODUCT_FAILURE,
+    FILTER_PRODUCT,
 } from '../actions/actionsType'
 
 const initialState = {
     products: [],
     loading: false,
-    error: null
+    error: null,
+    filterProducts: ""
 }
 
 export default function productReducer(state = initialState, action) {
@@ -28,6 +30,11 @@ export default function productReducer(state = initialState, action) {
                 ...state,
                 loading: false,
                 error: action.payload.error
+            };
+        case FILTER_PRODUCT:
+            return {
+                ...state,
+                filterProducts: action.payload
             };
         default:
             return state

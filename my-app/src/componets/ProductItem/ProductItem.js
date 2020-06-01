@@ -2,6 +2,11 @@ import React, {Component} from "react";
 import "./productItem.scss"
 
 class ProductItem extends Component{
+
+    selectProduct = () => {
+        console.log(this.props.id)
+    }
+
     render() {
         return (
             <div >
@@ -11,7 +16,7 @@ class ProductItem extends Component{
                             <img src={this.props.img}/>
                             <span className="card-title">{this.props.title}</span>
                             <a className="btn-floating halfway-fab waves-effect waves-light red">
-                                <i className="material-icons">add</i>
+                                <i className="material-icons" onClick={this.selectProduct}>add</i>
                             </a>
                         </div>
                         <div className="card-content">

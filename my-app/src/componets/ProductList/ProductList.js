@@ -11,6 +11,7 @@ class ProductList extends Component{
         this.props.onAddProduct(); //Получим данные о товаре
     }
 
+
     //Функция которая выводит товары
     renderListData() {
         //Если ошибка при загрузке
@@ -19,14 +20,26 @@ class ProductList extends Component{
         }
         //Если данные пришли
         if (this.props.propsProduct.length) {
+            //Фильтр товаров
+            let products = this.props.propsProduct;
+            let filterProducts;
+            if (products.length) {
+                for (let i = 0; i < products.length; i++) {
+                    filterProducts = products[i].filter(
+                        (product) => {
+                            return product.title.toLowerCase().indexOf(this.props.propsFilter.toLowerCase()) !== -1;
+                        }
+                    )
+                }
+            }
             return (
                 <>
-                    {this.props.propsProduct[0].map((item, index) => {
+                    {filterProducts.map((item, index) => {
                         return (
                             <div className="productItem__wrapper">
                                 <ProductItem
                                     key={item.id}
-                                    id={item.id}
+                                    id={index}
                                     title={item.title}
                                     descriptions={item.description}
                                     price={item.price}
@@ -55,7 +68,8 @@ class ProductList extends Component{
 //Здеь получаем state из reducer (который передан в store)
 function mapStateToProps(state) {
     return {
-        propsProduct: state.productReducer.products,
+        propsProduct: state.productReducer.products, //Все продукты
+        propsFilter: state.productReducer.filterProducts, //Value - из поля Фильтра
         propsError: state.productReducer.error
     }
 }

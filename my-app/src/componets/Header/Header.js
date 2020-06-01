@@ -1,12 +1,13 @@
 import React, {Component} from "react";
+import {connect} from "react-redux";
+import {onFilterProducts} from "../../actions";
 
 class Header extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            valueFilterInp: "Введите название товара"
-        }
+    //Фильтр товаров
+    filterProducts = (event) => {
+        let filterValue = event.target.value;
+        this.props.onFilter(filterValue);
     }
 
     render() {
@@ -29,7 +30,12 @@ class Header extends Component {
                                 <div>
                                     <label htmlFor="first_name">Фильтр товара</label>
                                 </div>
-                                <input type="text" id="autocomplete-input" className="autocomplete" placeholder={this.state.valueFilterInp}/>
+                                <input type="text"
+                                       id="autocomplete-input"
+                                       className="autocomplete"
+                                       value={this.props.propsFilter}
+                                       onChange={this.filterProducts}
+                                />
                             </div>
                         </div>
                     </div>
@@ -39,4 +45,16 @@ class Header extends Component {
     }
 }
 
-export default Header
+function mapStateToProps(state) {
+    return {
+        propsFilter: state.productReducer.filterProducts,
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        onFilter: (payload) => dispatch(onFilterProducts(payload)) //
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)
